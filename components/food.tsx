@@ -2,86 +2,111 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Separator } from "@/components/ui/separator"
 import { Card, CardContent } from "@/components/ui/card"
-import { LocateIcon, MenuIcon, PhoneIcon } from "lucide-react"
+import { LocateIcon, PhoneIcon } from "lucide-react"
 
 type Category = 'combos' | 'breakfast' | 'starters' | 'mainCourses' | 'drinks' | 'desserts';
 
-const config = {
-  header: {
-    title: "Acme Diner",
-    address: "Rua Principal, 123, Cidade Qualquer, Brasil",
-    phone: "(11) 5555-5555"
-  },
-  banner: {
-    title: "Refeições Deliciosas Entregues",
-    subtitle: "Explore nosso menu e peça seus pratos favoritos hoje mesmo.",
-    imageUrl: "https://www.designi.com.br/images/preview/10066992.jpg",
-    signUpButton: "Cadastre-se",
-    loginButton: "Entrar"
-  },
-  categories: {
-    combos: "Combos",
-    breakfast: "Café da Manhã",
-    starters: "Entradas",
-    mainCourses: "Pratos Principais",
-    drinks: "Bebidas",
-    desserts: "Sobremesas"
-  },
-  cart: {
-    title: "Carrinho",
-    items: [
-      { name: "Combo 1", price: "R$9,99" },
-      { name: "Café da Manhã 2", price: "R$6,99" },
-      { name: "Entrada 3", price: "R$4,99" }
-    ],
-    total: "Total",
-    totalPrice: "R$21,97",
-    checkoutButton: "Finalizar Compra"
-  },
-  footer: {
-    text: "&copy; 2023 Acme Diner. Todos os direitos reservados."
-  },
-  meals: {
-    combos: [
-      { name: "Combo 1", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais combos conforme necessário
-    ],
-    breakfast: [
-      { name: "Café da Manhã 1", price: "R$6,99", description: "Comece seu dia com um café da manhã saudável e saboroso.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Café da Manhã 2", price: "R$6,99", description: "Comece seu dia com um café da manhã saudável e saboroso.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais cafés da manhã conforme necessário
-    ],
-    starters: [
-      { name: "Entrada 1", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Entrada 2", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais entradas conforme necessário
-    ],
-    mainCourses: [
-      { name: "Prato Principal 1", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Prato Principal 2", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais pratos principais conforme necessário
-    ],
-    drinks: [
-      { name: "Bebida 1", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Bebida 2", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais bebidas conforme necessário
-    ],
-    desserts: [
-      { name: "Sobremesa 1", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      { name: "Sobremesa 2", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
-      // adicione mais sobremesas conforme necessário
-    ]
-  }
-}
+type CartItem = {
+  name: string;
+  price: string;
+  quantity: number;
+};
 
 export default function Food() {
+  const config = {
+    header: {
+      title: "Acme Diner",
+      address: "Rua Principal, 123, Cidade Qualquer, Brasil",
+      phone: "(11) 5555-5555"
+    },
+    banner: {
+      title: "Refeições Deliciosas Entregues",
+      subtitle: "Explore nosso menu e peça seus pratos favoritos hoje mesmo.",
+      imageUrl: "https://www.designi.com.br/images/preview/10066992.jpg",
+      signUpButton: "Cadastre-se",
+      loginButton: "Entrar"
+    },
+    categories: {
+      combos: "Combos",
+      breakfast: "Café da Manhã",
+      starters: "Entradas",
+      mainCourses: "Pratos Principais",
+      drinks: "Bebidas",
+      desserts: "Sobremesas"
+    },
+    cart: {
+      title: "Carrinho",
+      total: "Total",
+      checkoutButton: "Finalizar Compra"
+    },
+    footer: {
+      text: "&copy; 2023 Acme Diner. Todos os direitos reservados."
+    },
+    meals: {
+      combos: [
+        { name: "Combo 1", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ],
+      breakfast: [
+        { name: "Café da Manhã 1", price: "R$6,99", description: "Comece seu dia com um café da manhã saudável e saboroso.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Café da Manhã 2", price: "R$6,99", description: "Comece seu dia com um café da manhã saudável e saboroso.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ],
+      starters: [
+        { name: "Entrada 1", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Entrada 2", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ],
+      mainCourses: [
+        { name: "Prato Principal 1", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Prato Principal 2", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ],
+      drinks: [
+        { name: "Bebida 1", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Bebida 2", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ],
+      desserts: [
+        { name: "Sobremesa 1", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Sobremesa 2", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      ]
+    }
+  };
+
   const [selectedCategory, setSelectedCategory] = useState<Category>('combos');
+  const [cart, setCart] = useState<CartItem[]>([]);
+
+  const addToCart = (meal: { name: string; price: string }) => {
+    setCart(currentCart => {
+      const existingItem = currentCart.find(item => item.name === meal.name);
+      if (existingItem) {
+        return currentCart.map(item =>
+          item.name === meal.name ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      return [...currentCart, { ...meal, quantity: 1 }];
+    });
+  };
+
+  const removeFromCart = (itemName: string) => {
+    setCart(currentCart => {
+      const existingItem = currentCart.find(item => item.name === itemName);
+      if (existingItem && existingItem.quantity > 1) {
+        return currentCart.map(item =>
+          item.name === itemName ? { ...item, quantity: item.quantity - 1 } : item
+        );
+      }
+      return currentCart.filter(item => item.name !== itemName);
+    });
+  };
+
+  const calculateTotal = () => {
+    return cart.reduce((total, item) => {
+      const price = parseFloat(item.price.replace('R$', '').replace(',', '.'));
+      return total + price * item.quantity;
+    }, 0).toFixed(2);
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#F8F9FA]">
@@ -110,17 +135,22 @@ export default function Food() {
                 <div className="space-y-2">
                   <h3 className="text-lg font-bold">{config.cart.title}</h3>
                   <div className="space-y-2">
-                    {config.cart.items.map((item, index) => (
+                    {cart.map((item, index) => (
                       <div key={index} className="flex items-center justify-between">
-                        <span>{item.name}</span>
-                        <span className="font-bold">{item.price}</span>
+                        <span>{item.name} (x{item.quantity})</span>
+                        <div>
+                          <span className="font-bold mr-2">
+                            R${(parseFloat(item.price.replace('R$', '').replace(',', '.')) * item.quantity).toFixed(2)}
+                          </span>
+                          <Button onClick={() => removeFromCart(item.name)} variant="outline" size="sm">-</Button>
+                        </div>
                       </div>
                     ))}
                   </div>
                   <Separator />
                   <div className="flex items-center justify-between">
                     <span className="font-bold">{config.cart.total}</span>
-                    <span className="font-bold text-lg">{config.cart.totalPrice}</span>
+                    <span className="font-bold text-lg">R${calculateTotal()}</span>
                   </div>
                   <Button className="w-full bg-[#FF8C00] text-white">{config.cart.checkoutButton}</Button>
                 </div>
@@ -144,37 +174,49 @@ export default function Food() {
           </div>
         </div>
       </div>
-      <main className="container flex flex-col md:flex-row md:items-start md:gap-4 py-6 flex-1">
-        <aside className="md:w-1/4 space-y-4">
+      <main className="container py-6 flex-1">
+  <div className="flex flex-col md:flex-row gap-6">
+    <div className="md:w-1/4">
+      <div className="md:sticky md:top-6 overflow-x-auto md:overflow-x-visible pb-4 mb-4 md:pb-0 md:mb-0">
+        <div className="flex md:flex-col space-x-2 md:space-x-0 md:space-y-2">
           {Object.entries(config.categories).map(([key, value]) => (
             <Button
               key={key}
               variant={selectedCategory === key ? "default" : "outline"}
-              className="w-full justify-center md:justify-start"
+              className="flex-shrink-0 md:w-full justify-center md:justify-start"
               onClick={() => setSelectedCategory(key as Category)}
             >
               {value}
             </Button>
           ))}
-        </aside>
-        <section className="md:w-3/4 space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            {config.meals[selectedCategory].map((meal:any, index:any) => (
-              <Card key={index}>
-                <img src={meal.imageUrl} alt={meal.name} className="rounded-t-lg" />
-                <CardContent className="space-y-2">
-                  <h3 className="text-lg font-bold">{meal.name}</h3>
-                  <p>{meal.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-bold">{meal.price}</span>
-                    <Button variant="outline" size="sm">Add to Cart</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-      </main>
+        </div>
+      </div>
+    </div>
+    <section className="md:w-3/4 space-y-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {config.meals[selectedCategory].map((meal:any, index:any) => (
+          <Card key={index}>
+            <img src={meal.imageUrl} alt={meal.name} className="rounded-t-lg" />
+            <CardContent className="space-y-2">
+              <h3 className="text-lg font-bold">{meal.name}</h3>
+              <p>{meal.description}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-lg font-bold">{meal.price}</span>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => addToCart({ name: meal.name, price: meal.price })}
+                >
+                  Add to Cart
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </section>
+  </div>
+</main>
       <footer className="bg-[#FF8C00] text-white text-center py-4">
         {config.footer.text}
       </footer>
