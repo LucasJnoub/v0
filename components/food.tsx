@@ -19,7 +19,7 @@ type CartItem = {
 export default function Food() {
   const config = {
     header: {
-      title: "Acme Diner",
+      title: "Delivefy",
       address: "Rua Principal, 123, Cidade Qualquer, Brasil",
       phone: "(11) 5555-5555"
     },
@@ -44,7 +44,7 @@ export default function Food() {
       checkoutButton: "Finalizar Compra"
     },
     footer: {
-      text: "&copy; 2023 Acme Diner. Todos os direitos reservados."
+      text: "&copy; 2024 Delivefy. Todos os direitos reservados."
     },
     meals: {
       combos: [
