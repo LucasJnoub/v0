@@ -61,6 +61,21 @@ const config = {
       { name: "Entrada 1", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
       { name: "Entrada 2", price: "R$4,99", description: "Uma entrada saborosa para começar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
       // adicione mais entradas conforme necessário
+    ],
+    mainCourses: [
+      { name: "Prato Principal 1", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      { name: "Prato Principal 2", price: "R$19,99", description: "Um prato principal delicioso e nutritivo.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      // adicione mais pratos principais conforme necessário
+    ],
+    drinks: [
+      { name: "Bebida 1", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      { name: "Bebida 2", price: "R$4,99", description: "Uma bebida refrescante para acompanhar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      // adicione mais bebidas conforme necessário
+    ],
+    desserts: [
+      { name: "Sobremesa 1", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      { name: "Sobremesa 2", price: "R$6,99", description: "Uma sobremesa deliciosa para finalizar sua refeição.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+      // adicione mais sobremesas conforme necessário
     ]
   }
 }
