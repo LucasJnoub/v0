@@ -6,7 +6,7 @@
   import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
   import { Separator } from "@/components/ui/separator"
   import { Card, CardContent } from "@/components/ui/card"
-  import { LocateIcon, PhoneIcon } from "lucide-react"
+  import { LocateIcon, PhoneIcon, Trash } from "lucide-react"
   import {
     Dialog,
     DialogContent,
@@ -69,6 +69,17 @@
     meals: {
       combos: [
         { name: "Combo 1", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
+        { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
         { name: "Combo 2", price: "R$9,99", description: "Um combo delicioso com sua escolha de prato principal, acompanhamento e bebida.", imageUrl: "https://292aa00292a014763d1b-96a84504aed2b25fc1239be8d2b61736.ssl.cf1.rackcdn.com/GaleriaImagem/130275/fotos-para-hamburguerias_fotografia-de-hamburguer-4.JPG" },
       ],
       breakfast: [
@@ -180,19 +191,32 @@
             <div className="space-y-2">
               <h3 className="text-lg font-bold">{config.cart.title}</h3>
               <div className="space-y-2">
-                {cart.map((item, index) => (
-                  <div key={index} className="flex items-center justify-between">
-                    <span>{item.name} (x{item.quantity})</span>
+              {cart.map((item, index) => (
+          <div key={index} className="flex flex-col">
+            <span>{item.name} ({item.price})</span>
+            {item.extras && item.extras.length > 0 && (
+              <div className="ml-4 text-sm">
+                {item.extras.map((extra, extraIndex) => (
+                  <div key={extraIndex} className="flex items-start justify-between">
+                    <div>{extra}</div>
+                  </div>
+                ))}
+              </div>
+            )}
                     <div>
                       <span className="font-bold mr-2">
                         {item.price}
                       </span>
-                      <Button onClick={() => removeFromCart(index)} variant="outline" size="sm">-</Button>
+                      <Button onClick={() => removeFromCart(index)} variant="ghost" className="text-red-500" size="sm">{<Trash className="w-4 h-4"></Trash>}</Button>
+                    <Separator></Separator>
                     </div>
                   </div>
                 ))}
               </div>
-              <Separator />
+
+
+                
+              {/* <Separator /> */}
               <div className="flex items-center justify-between">
                 <span className="font-bold">{config.cart.total}</span>
                 <span className="font-bold text-lg">R${calculateTotal().toFixed(2)}</span>
