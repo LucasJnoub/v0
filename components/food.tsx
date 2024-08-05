@@ -265,18 +265,18 @@
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {config.meals[selectedCategory].map((meal:any, index:any) => (
                   <Card key={index}>
-                    <img src={meal.imageUrl} alt={meal.name} className="rounded-t-lg" />
+                    <img src={meal.imageUrl} alt={meal.name} className="rounded-t-lg mb-2" />
                     <CardContent className="space-y-2">
                       <h3 className="text-lg font-bold">{meal.name}</h3>
                       <p>{meal.description}</p>
-                      <div className="flex justify-between items-center">
+                      <div className="flex justify-between items-center mt-2">
                         <span className="text-lg font-bold">{meal.price}</span>
                         <Button 
                           variant="outline" 
                           size="sm" 
                           onClick={() => openDialog(meal)}
                         >
-                          Add to Cart
+                          Adicionar ao carrinho
                         </Button>
                       </div>
                     </CardContent>

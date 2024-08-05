@@ -1,4 +1,3 @@
-import Dashboard from '@/components/dashboard'
 import Food from '@/components/food'
 import React from 'react'
 
